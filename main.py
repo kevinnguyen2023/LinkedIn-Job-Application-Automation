@@ -4,6 +4,7 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.common.by import By
 import time
+import pytest
 
 ACCOUNT_EMAIL = YOUR LOGIN EMAIL
 ACCOUNT_PASSWORD = YOUR LOGIN PASSWORD
@@ -48,6 +49,7 @@ sign_in_button = driver.find_element(by=By.LINK_TEXT, value="Sign in")
 sign_in_button.click()
 
 # Sign in
+@pytest.mark.login
 time.sleep(5)
 email_field = driver.find_element(by=By.ID, value="username")
 email_field.send_keys(ACCOUNT_EMAIL)
@@ -63,6 +65,7 @@ time.sleep(5)
 all_listings = driver.find_elements(by=By.CSS_SELECTOR, value=".job-card-container--clickable")
 
 # Apply for Jobs
+@pytest.mark.debug
 for listing in all_listings:
     print("Opening Listing")
     listing.click()
